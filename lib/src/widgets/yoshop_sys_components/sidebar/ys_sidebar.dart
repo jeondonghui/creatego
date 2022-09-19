@@ -7,18 +7,23 @@ class YSLogoBanner extends StatelessWidget {
   final String title;
   final VoidCallback? onMenuPressed;
   final VoidCallback? onTitlePressed;
+  final Color? bgColor;
 
   YSLogoBanner(
-      {Key? key, required this.title, this.onMenuPressed, this.onTitlePressed})
+      {Key? key,
+      required this.title,
+      this.onMenuPressed,
+      this.onTitlePressed,
+      this.bgColor = ThemeColors.orange500})
       : super(key: key);
 
   Mix get boxMix => Mix(
         paddingHorizontal(16),
-        const BoxAttributes(
+        BoxAttributes(
             width: 256,
             height: 64,
             alignment: Alignment.center,
-            color: ThemeColors.orange500),
+            color: bgColor),
       );
 
   Mix get logoTextMix => Mix(
@@ -258,19 +263,20 @@ class YSSidebarParentItem extends StatelessWidget {
   bool isExpanded;
   final VoidCallback? onPressed;
   Color? heroIconColor;
+  Color? activeBgColor;
 
   bool isActive;
-  YSSidebarParentItem({
-    Key? key,
-    this.children,
-    required this.title,
-    this.heroIcon,
-    this.onPressed,
-    this.isActive = false,
-    this.isExpanded = false,
-    this.heroIconColor = ThemeColors.coolgray500,
-    this.svgPicIcon,
-  }) {
+  YSSidebarParentItem(
+      {Key? key,
+      this.children,
+      required this.title,
+      this.heroIcon,
+      this.onPressed,
+      this.isActive = false,
+      this.isExpanded = false,
+      this.heroIconColor = ThemeColors.coolgray500,
+      this.svgPicIcon,
+      this.activeBgColor = ThemeColors.orange500}) {
     if (children == null) {
       isExpanded = isActive;
     }
@@ -284,7 +290,7 @@ class YSSidebarParentItem extends StatelessWidget {
         height(40),
         rounded(6),
         paddingHorizontal(12),
-        bgColor(isExpanded ? ThemeColors.orange500 : Colors.transparent),
+        bgColor(isExpanded ? activeBgColor! : Colors.transparent),
       );
 
   Mix get titleMix => Mix(textStyle(ThemeTextRegular.sm
