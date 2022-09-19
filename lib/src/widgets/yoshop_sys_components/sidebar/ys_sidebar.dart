@@ -137,18 +137,20 @@ class YSSidebar extends StatefulWidget {
   final int currentIndex;
   void Function(int)? onTabChange;
   final Widget? bottomWidget;
-  YSSidebar(
-      {Key? key,
-      this.infoBarUpperText,
-      this.infoBarLowerText,
-      this.title = 'YoShop',
-      required this.children,
-      this.onTitlePressed,
-      this.onMenuPressed,
-      this.currentIndex = 0,
-      this.onTabChange,
-      this.bottomWidget})
-      : super(key: key);
+  final Color? sidebarBgColor;
+  YSSidebar({
+    Key? key,
+    this.infoBarUpperText,
+    this.infoBarLowerText,
+    this.title = 'YoShop',
+    required this.children,
+    this.onTitlePressed,
+    this.onMenuPressed,
+    this.currentIndex = 0,
+    this.onTabChange,
+    this.bottomWidget,
+    this.sidebarBgColor,
+  }) : super(key: key);
 
   @override
   State<YSSidebar> createState() => _YSSidebarState();
@@ -173,6 +175,7 @@ class _YSSidebarState extends State<YSSidebar> {
         YSLogoBanner(
             title: widget.title,
             onMenuPressed: widget.onMenuPressed,
+            bgColor: widget.sidebarBgColor,
             onTitlePressed: widget.onTitlePressed),
         if (widget.infoBarLowerText != null && widget.infoBarUpperText != null)
           YSInfoBanner(
@@ -276,7 +279,7 @@ class YSSidebarParentItem extends StatelessWidget {
       this.isExpanded = false,
       this.heroIconColor = ThemeColors.coolgray500,
       this.svgPicIcon,
-      this.activeBgColor = ThemeColors.orange500}) {
+      this.activeBgColor}) {
     if (children == null) {
       isExpanded = isActive;
     }
@@ -290,7 +293,9 @@ class YSSidebarParentItem extends StatelessWidget {
         height(40),
         rounded(6),
         paddingHorizontal(12),
-        bgColor(isExpanded ? activeBgColor! : Colors.transparent),
+        bgColor(isExpanded
+            ? activeBgColor ?? ThemeColors.orange500
+            : Colors.transparent),
       );
 
   Mix get titleMix => Mix(textStyle(ThemeTextRegular.sm
