@@ -175,7 +175,7 @@ class _YSSidebarState extends State<YSSidebar> {
         YSLogoBanner(
             title: widget.title,
             onMenuPressed: widget.onMenuPressed,
-            bgColor: widget.sidebarBgColor,
+            bgColor: widget.sidebarBgColor ?? ThemeColors.orange500,
             onTitlePressed: widget.onTitlePressed),
         if (widget.infoBarLowerText != null && widget.infoBarUpperText != null)
           YSInfoBanner(
@@ -210,6 +210,7 @@ class _YSSidebarState extends State<YSSidebar> {
       if (_item.runtimeType == YSSidebarParentItem) {
         children.add(
           YSSidebarParentItem(
+            activeBgColor: widget.sidebarBgColor ?? ThemeColors.orange500,
             title: _item.title,
             isExpanded: _expandedIndex == i,
             isActive: i == widget.currentIndex,
