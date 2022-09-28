@@ -7,25 +7,27 @@ class DioClientForRetrofit {
   final String? bearerToken;
   final String? contentType;
   final ResponseType responseType;
+  final String? basicToken;
   DioClientForRetrofit(
       {this.bearerToken,
       this.contentType,
+      this.basicToken,
       this.responseType = ResponseType.json});
 
   Map<String, dynamic>? get headers {
+    Map<String, dynamic> header = {};
+    header['Content-Type'] = contentType ?? "application/json";
+    header['Accept'] = "application/json";
+    header['Accept-Encoding'] = "gzip,compress";
+
     if (bearerToken != null) {
-      return {
-        "Authorization": "Bearer $bearerToken",
-        "Content-Type": contentType ?? "application/json",
-        "Accept": "application/json",
-        "Accept-Encoding": 'gzip,compress'
-      };
+      header['Authorization'] = "Bearer $bearerToken";
     }
-    return {
-      "Content-Type": contentType ?? "application/json",
-      "Accept": "application/json",
-      "Accept-Encoding": "gzip,compress"
-    };
+    if (basicToken != null) {
+      header['Authorization'] = "Basic $basicToken";
+    }
+
+    return header;
   }
 
   Dio init({List<Interceptor>? customInterceptors, bool prettyLog = true}) {
