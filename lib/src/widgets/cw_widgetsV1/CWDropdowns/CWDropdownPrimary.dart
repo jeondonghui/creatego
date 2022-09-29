@@ -14,7 +14,6 @@ class CWDropdownPrimary extends StatefulWidget {
   final double? dropdownMaxHeight;
   final Color? dropdownBtnColor;
   final bool withSearchBox;
-  final FocusNode? focusNode;
 
   /// Dropdown-button-width, Dropdown-Options-Width
   ///  are changeable.
@@ -32,8 +31,7 @@ class CWDropdownPrimary extends StatefulWidget {
       this.hintText,
       this.dropdownMaxHeight,
       this.dropdownBtnColor,
-      this.showDropdownIcon = true,
-      this.focusNode})
+      this.showDropdownIcon = true})
       : super(key: key) {
     if (value == null) isValueNull = true;
     hintText ??= "Options";
@@ -72,7 +70,6 @@ class _CWDropdownPrimaryState extends State<CWDropdownPrimary> {
         alignment: Alignment.centerLeft,
         underline: const SizedBox(),
         onChanged: widget.onChanged,
-        focusNode: widget.focusNode,
         isExpanded: true,
         focusColor: ThemeColors.transparent,
         onMenuStateChange: (bool changed) {},

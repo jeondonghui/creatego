@@ -136,6 +136,7 @@ class CWInputField extends StatelessWidget {
   final ValueChanged<String>? onChanged;
   final ValueChanged<String>? onSubmitted;
   final TextInputAction? textInputAction;
+  final FocusNode? focusNode;
 
   /// * Better to use [CWInputFieldWithValidBorder]
   /// with custom error handling from the page.
@@ -155,6 +156,7 @@ class CWInputField extends StatelessWidget {
       this.onChanged,
       this.onSubmitted,
       this.textInputAction,
+      this.focusNode,
       Key? key})
       : super(key: key);
 
@@ -174,6 +176,7 @@ class CWInputField extends StatelessWidget {
         cursorColor: ThemeColors.coolgray900,
         style: ThemeTextRegular.base.copyWith(color: ThemeColors.coolgray900),
         obscureText: obscureText!,
+        focusNode: focusNode,
         decoration: InputDecoration(
           hintText: hintText,
           hintStyle:
@@ -409,11 +412,11 @@ class CWInputFieldWithDropdownM extends StatelessWidget {
   CWInputFieldDropdown2? _CWInputFieldDropdown2;
 
   void openDropdown() {
-    if(_CWInputFieldDropdown2!=null) {
+    if (_CWInputFieldDropdown2 != null) {
       _CWInputFieldDropdown2?.openDropdown();
     }
   }
-  
+
   Widget _setSearchDropdown(BuildContext context) {
     _CWInputFieldDropdown2 = CWInputFieldDropdown2(
       items: dropdownItems,
@@ -424,14 +427,11 @@ class CWInputFieldWithDropdownM extends StatelessWidget {
       isDropdownOptionsIconRight: isDropdownOptionsIconRight,
       dropdownMaxHeight: dropdownMaxHeight,
     );
-    return _CWInputFieldDropdown2??Container();
+    return _CWInputFieldDropdown2 ?? Container();
   }
-
 
   @override
   Widget build(BuildContext context) {
-
-
     final _borderRadius =
         isDropdownRight! ? _borderRadiusLeft : _borderRadiusRight;
 
