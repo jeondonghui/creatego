@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mix/mix.dart';
 import 'package:creatego/creatego_theme.dart';
 
-const _boxVariant = Variant('boxVariant');
+final _boxVariant = Variant('boxVariant');
 
 class FXBoxContent extends StatelessWidget {
   final double height;
@@ -74,7 +74,7 @@ class FXBoxContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Box(
       mix: FXBoxContentMix,
-      variant: _boxVariant,
+      variants: [_boxVariant],
       child: SpacedRow(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

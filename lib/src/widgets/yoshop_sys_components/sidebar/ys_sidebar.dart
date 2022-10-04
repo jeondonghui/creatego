@@ -44,10 +44,10 @@ class YSLogoBanner extends StatelessWidget {
         children: [
           MouseRegion(
               cursor: SystemMouseCursors.click,
-              child: Pressable(
+              child: PressableMix(
                   mix: iconMix,
-                  child: const IconMix(Icons.menu),
-                  onPressed: onMenuPressed)),
+                  onPressed: onMenuPressed,
+                  child: const IconMix(Icons.menu))),
           PressableMix(
               onPressed: onTitlePressed,
               child: TextMix(title, mix: logoTextMix)),

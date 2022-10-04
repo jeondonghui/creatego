@@ -29,7 +29,7 @@ dependencies:
   hovering: ^1.0.4
   flutter_screenutil: ^5.0.0+2
   image_picker: ^0.8.4+11
-  mix: ^0.0.6
+  mix: ^0.0.7
   flutter_easylogger: ^2.3.3
   flutter_svg: ^1.1.4
 

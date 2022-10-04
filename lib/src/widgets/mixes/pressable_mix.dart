@@ -24,12 +24,12 @@ class PressableMix extends StatelessWidget {
   Widget build(BuildContext context) {
     return MouseRegion(
         cursor: mouseCursors,
-        child: Pressable(
+        child: PressableMix(
             onLongPressed: onLongPressed,
             mix: mix,
             variant: variant,
             autofocus: autofocus,
-            child: child,
-            onPressed: onPressed));
+            onPressed: onPressed,
+            child: child));
   }
 }

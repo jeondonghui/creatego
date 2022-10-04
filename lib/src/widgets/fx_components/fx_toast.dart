@@ -1,10 +1,10 @@
 import 'package:creatego/creatego_theme.dart';
 import 'package:mix/mix.dart';
 
-const _toastTitleVariant = Variant('toastTitleVariant');
-const _toastMessageVariant = Variant('toastMessageVariant');
-const _toastIconVariant = Variant('toastIconVariant');
-const _toastCloseIconVariant = Variant('toastCloseIconVariant');
+final _toastTitleVariant = Variant('toastTitleVariant');
+final _toastMessageVariant = Variant('toastMessageVariant');
+final _toastIconVariant = Variant('toastIconVariant');
+final _toastCloseIconVariant = Variant('toastCloseIconVariant');
 
 class FxToast extends StatelessWidget {
   final ToastType toastType;
@@ -54,24 +54,23 @@ class FxToast extends StatelessWidget {
       mix: toastMix,
       child: toastMix.row(children: [
         Box(
-          variant: _toastIconVariant,
+          variants: [_toastIconVariant],
           child: HeroIcon(_getIcons(toastType)),
         ),
         Box(
           child: toastMix.column(children: [
             Box(
-              variant: _toastTitleVariant,
+              variants: [_toastTitleVariant],
               child: TextMix(toastTitle),
             ),
             Box(
-              variant: _toastMessageVariant,
+              variants: [_toastMessageVariant],
               child: TextMix(toastMessage),
             ),
           ]),
         ),
         const Spacer(),
-        const Box(
-            variant: _toastCloseIconVariant, child: HeroIcon(HeroIcons.x)),
+        Box(variants: [_toastCloseIconVariant], child: HeroIcon(HeroIcons.x)),
       ]),
     );
   }

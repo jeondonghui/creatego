@@ -2,7 +2,7 @@ import 'package:creatego/creatego_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:mix/mix.dart';
 
-const _testButton = Variant('testButton');
+final _testButton = Variant('testButton');
 
 class FXTopBar extends StatelessWidget {
   final Widget? logo;
@@ -144,11 +144,11 @@ class FXTopBar extends StatelessWidget {
                 //   ),
                 // ),
                 if (isTest)
-                  const Box(
-                    variant: _testButton,
+                  Box(
+                    variants: [_testButton],
                     child: TextMix(
                       'TEST',
-                      variant: _testButton,
+                      variants: [_testButton],
                     ),
                   ),
               ],
@@ -179,7 +179,7 @@ class FXTopBar extends StatelessWidget {
                 else
                   PressableMix(
                     mix: topBarRightSide,
-                    onPressed: (){},
+                    onPressed: () {},
                     child: const IconMix(
                       Icons.keyboard_arrow_down,
                     ),

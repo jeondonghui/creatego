@@ -2,7 +2,7 @@ import 'package:creatego/creatego_theme.dart';
 import 'package:mix/mix.dart';
 import 'package:flutter/material.dart';
 
-const _navBarPadding = Variant('navBarPadding');
+final _navBarPadding = Variant('navBarPadding');
 
 class FXNavBar extends StatelessWidget {
   final Color backGroundColor;
@@ -34,7 +34,7 @@ class FXNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Box(
       mix: fxNavBarMix,
-      variant: _navBarPadding,
+      variants: [_navBarPadding],
       child: SpacedRow(
         children: _buildNavbarChildren(context),
         horizontalSpace: 20,
