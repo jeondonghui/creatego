@@ -11,12 +11,14 @@ class YSStatusBadge extends StatelessWidget {
   bool? isInactive;
   bool? isSquare;
   final double? width;
+  final double horizontalPaddingSize;
   final VoidCallback? onPressed;
 
   YSStatusBadge({
     required this.text,
     this.height = 32,
     this.width,
+    this.horizontalPaddingSize=10,
     this.onPressed,
     this.isInactive,
     this.isError,
@@ -58,8 +60,8 @@ class YSStatusBadge extends StatelessWidget {
           color: bgColor,
         ),
         height: height,
-        padding: const EdgeInsets.symmetric(
-          horizontal: 10,
+        padding: EdgeInsets.symmetric(
+          horizontal: horizontalPaddingSize,
         ),
         child: Text(
           text,
