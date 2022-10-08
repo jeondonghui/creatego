@@ -37,10 +37,10 @@ class SizedTextDark extends StatelessWidget {
         text!,
         style: textStyle ??
             const TextStyle(
-              color: Colors.white,
-              fontSize: 14,
-              fontWeight: FontWeight.w400,
-            ),
+                color: Colors.white,
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+                fontFamily: "MaitreeRegular"),
         overflow: overflow,
         textAlign: textAlign,
         softWrap: true,
