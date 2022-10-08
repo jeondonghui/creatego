@@ -14,6 +14,7 @@ export 'src/theme/theme_text_style.dart';
 export 'src/widgets/mixes/pressable_mix.dart';
 
 export 'src/widgets/yoshop_sys_components/sized_text/sized_text.dart';
+export 'src/widgets/yoshop_sys_components/sized_text/sized_text_dark.dart';
 export 'src/widgets/yoshop_sys_components/spaced_column/spaced_column.dart';
 export 'src/widgets/yoshop_sys_components/spaced_row/spaced_row.dart';
 
