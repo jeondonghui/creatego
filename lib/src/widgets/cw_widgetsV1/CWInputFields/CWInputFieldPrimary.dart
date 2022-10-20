@@ -1,4 +1,5 @@
 import 'package:creatego/creatego_theme.dart';
+import 'package:flutter/services.dart';
 import '../CWDropdowns/CWDropdownPrimary.dart';
 
 class CWInputFieldWithLabel extends StatelessWidget {
@@ -137,6 +138,7 @@ class CWInputField extends StatelessWidget {
   final ValueChanged<String>? onSubmitted;
   final TextInputAction? textInputAction;
   final FocusNode? focusNode;
+  final List<TextInputFormatter>? inputFormatters;
 
   /// * Better to use [CWInputFieldWithValidBorder]
   /// with custom error handling from the page.
@@ -157,6 +159,7 @@ class CWInputField extends StatelessWidget {
       this.onSubmitted,
       this.textInputAction,
       this.focusNode,
+      this.inputFormatters,
       Key? key})
       : super(key: key);
 
@@ -176,6 +179,7 @@ class CWInputField extends StatelessWidget {
         cursorColor: ThemeColors.coolgray900,
         style: ThemeTextRegular.base.copyWith(color: ThemeColors.coolgray900),
         obscureText: obscureText!,
+        inputFormatters: inputFormatters,
         focusNode: focusNode,
         decoration: InputDecoration(
           hintText: hintText,
