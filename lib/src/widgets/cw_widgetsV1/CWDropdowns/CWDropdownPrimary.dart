@@ -5,9 +5,11 @@ class CWDropdownPrimary extends StatefulWidget {
   final ValueChanged? onChanged;
   final dynamic value;
   final List items;
+  final List? codes;
   final IconData? leftIcon;
-  String? hintText;
-  bool isValueNull = false;
+  final String? searchText;
+  final String? hintText;
+  final bool isValueNull;
   final double? dropdownBtnWidth;
   final double? dropdownOptionsWidth;
   final bool? showDropdownIcon;
@@ -15,38 +17,34 @@ class CWDropdownPrimary extends StatefulWidget {
   final Color? dropdownBtnColor;
   final bool withSearchBox;
 
-  /// Dropdown-button-width, Dropdown-Options-Width
-  ///  are changeable.
-
-  /// * DO NOT PASS the SAME TEXT in items.
-  CWDropdownPrimary(
-      {Key? key,
-      required this.items,
-      this.onChanged,
-      this.withSearchBox = false,
-      this.value,
-      this.leftIcon,
-      this.dropdownBtnWidth = 115,
-      this.dropdownOptionsWidth = 224,
-      this.hintText,
-      this.dropdownMaxHeight,
-      this.dropdownBtnColor,
-      this.showDropdownIcon = true})
-      : super(key: key) {
-    if (value == null) isValueNull = true;
-    hintText ??= "Options";
-  }
+  const CWDropdownPrimary({
+    Key? key,
+    required this.items,
+    this.codes,
+    this.onChanged,
+    this.withSearchBox = false,
+    this.value,
+    this.leftIcon,
+    this.dropdownBtnWidth = 115,
+    this.dropdownOptionsWidth = 224,
+    this.searchText = 'Serarch',
+    this.hintText = 'Choose',
+    this.dropdownMaxHeight,
+    this.dropdownBtnColor,
+    this.showDropdownIcon = true,
+  })  : isValueNull = value == null,
+        super(key: key);
 
   @override
   State<CWDropdownPrimary> createState() => _CWDropdownPrimaryState();
 }
 
 class _CWDropdownPrimaryState extends State<CWDropdownPrimary> {
-  final TextEditingController searchcontroller = TextEditingController();
+  final TextEditingController _searchController = TextEditingController();
 
   @override
   void dispose() {
-    searchcontroller.dispose();
+    _searchController.dispose();
     super.dispose();
   }
 
@@ -60,12 +58,12 @@ class _CWDropdownPrimaryState extends State<CWDropdownPrimary> {
             ? Padding(
                 padding: const EdgeInsets.only(top: 8.0),
                 child: CWInputField(
-                  controller: searchcontroller,
-                  hintText: "Search",
+                  controller: _searchController,
+                  hintText: widget.searchText,
                 ),
               )
             : null,
-        searchController: searchcontroller,
+        searchController: _searchController,
         itemPadding: EdgeInsets.zero,
         alignment: Alignment.centerLeft,
         underline: const SizedBox(),
@@ -176,7 +174,7 @@ class _CWDropdownPrimaryState extends State<CWDropdownPrimary> {
                   : widget.dropdownBtnWidth! - 30,
           child: Center(
             child: SizedText(
-              text: widget.value.toString(),
+              text: _valueText(),
               textStyle: ThemeTextSemiBold.base.copyWith(
                   color: widget.dropdownBtnColor == null
                       ? ThemeColors.coolgray600
@@ -197,16 +195,27 @@ class _CWDropdownPrimaryState extends State<CWDropdownPrimary> {
     ];
   }
 
+  String _valueText() {
+    if (widget.codes == null) {
+      return widget.value ?? '';
+    }
+
+    int index = widget.codes!.indexOf(widget.value);
+    return index != -1 ? widget.items[index] : '';
+  }
+
   List<DropdownMenuItem<String>> _getItems() {
     List listValues = widget.items;
-    List<DropdownMenuItem<String>> _menuItems = [];
+    List listCodes = widget.codes ?? widget.items;
+    List<DropdownMenuItem<String>> menuItems = [];
+
     for (int i = 0; i < listValues.length; i++) {
-      _menuItems.add(
+      menuItems.add(
         DropdownMenuItem<String>(
-          value: listValues[i].toString(),
+          value: listCodes[i],
           child: Container(
             decoration: BoxDecoration(
-                color: widget.value == listValues[i]
+                color: widget.value == listCodes[i]
                     ? ThemeColors.coolgray100
                     : ThemeColors.white,
                 border: Border(
@@ -228,7 +237,7 @@ class _CWDropdownPrimaryState extends State<CWDropdownPrimary> {
       );
     }
 
-    return _menuItems;
+    return menuItems;
   }
 }
 
@@ -614,34 +623,30 @@ class _CWDropdownWithIconMenu2State extends State<CWDropdownWithIconMenu2> {
 class CWDropdownWithIcon extends StatefulWidget {
   final ValueChanged? onChanged;
   final dynamic value;
-  final dynamic items;
+  final List items;
+  final List? codes;
   final IconData? leftIcon;
-  String? hintText;
-  bool isValueNull = false;
+  final String? hintText;
+  final bool isValueNull;
   final double? dropdownBtnWidth;
   final double? dropdownOptionsWidth;
   final bool? isDropdownOptionsIconRight;
   final double? dropdownMaxHeight;
 
-  /// Input-dropdown-width, Input-dropdown-Width
-  ///  are changeable.
-
-  /// * DO NOT PASS the SAME TEXT in items.
-  CWDropdownWithIcon(
-      {Key? key,
-      required this.items,
-      this.onChanged,
-      this.value,
-      this.leftIcon,
-      this.dropdownBtnWidth = 215,
-      this.dropdownOptionsWidth = 224,
-      this.isDropdownOptionsIconRight = false,
-      this.dropdownMaxHeight,
-      this.hintText})
-      : super(key: key) {
-    if (value == null) isValueNull = true;
-    hintText ??= "Options";
-  }
+  const CWDropdownWithIcon({
+    Key? key,
+    required this.items,
+    this.codes,
+    this.onChanged,
+    this.value,
+    this.leftIcon,
+    this.dropdownBtnWidth = 215,
+    this.dropdownOptionsWidth = 224,
+    this.isDropdownOptionsIconRight = false,
+    this.dropdownMaxHeight,
+    this.hintText = 'Choose',
+  })  : isValueNull = value == null,
+        super(key: key);
 
   @override
   State<CWDropdownWithIcon> createState() => _CWDropdownWithIconState();
@@ -743,7 +748,7 @@ class _CWDropdownWithIconState extends State<CWDropdownWithIcon> {
             width: widget.leftIcon != null
                 ? widget.dropdownBtnWidth! - 99
                 : widget.dropdownBtnWidth! - 60,
-            text: widget.value.toString(),
+            text: _valueText(),
             overflow: TextOverflow.ellipsis,
             textStyle: ThemeTextSemiBold.base
                 .copyWith(color: ThemeColors.coolgray600)),
@@ -761,16 +766,27 @@ class _CWDropdownWithIconState extends State<CWDropdownWithIcon> {
     ];
   }
 
+  String _valueText() {
+    if (widget.codes == null) {
+      return widget.value ?? '';
+    }
+
+    int index = widget.codes!.indexOf(widget.value);
+    return index != -1 ? widget.items[index] : '';
+  }
+
   List<DropdownMenuItem<String>> _getItems() {
     List listValues = widget.items;
-    List<DropdownMenuItem<String>> _menuItems = [];
+    List listCodes = widget.codes ?? widget.items;
+    List<DropdownMenuItem<String>> menuItems = [];
+
     for (int i = 0; i < listValues.length; i++) {
-      _menuItems.add(
+      menuItems.add(
         DropdownMenuItem<String>(
-          value: listValues[i].toString(),
+          value: listCodes[i],
           child: Container(
             decoration: BoxDecoration(
-                color: widget.value == listValues[i]
+                color: widget.value == listCodes[i]
                     ? ThemeColors.coolgray100
                     : ThemeColors.white,
                 border: Border(
@@ -792,7 +808,7 @@ class _CWDropdownWithIconState extends State<CWDropdownWithIcon> {
       );
     }
 
-    return _menuItems;
+    return menuItems;
   }
 }
 
